@@ -2,7 +2,7 @@ import pandas as pd
 from tabulate import tabulate
 
 # Cargar el archivo CSV
-file_path = 'C:/Users/sebbo/Downloads/players.csv'
+file_path = 'players.csv'
 df = pd.read_csv(file_path)
 
 # Convertir la columna 'height' a centímetros
