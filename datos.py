@@ -23,5 +23,9 @@ selected_columns.columns = ['posición', 'altura (cm)', 'peso (kg)', 'IMC']
 # Calcular el promedio de altura, peso e IMC por cada posición
 average_columns = selected_columns.groupby('posición').mean().reset_index()
 
+# Guardar los datos promediados en un archivo JSON
+output_file_path = 'C:/Users/sebbo/Documents/prueba interna/promedios_posiciones.json'
+average_columns.to_json(output_file_path, orient='records', lines=True)
+
 # Mostrar los datos promediados usando tabulate con líneas continuas
 print(tabulate(average_columns, headers='keys', tablefmt='fancy_grid'))
