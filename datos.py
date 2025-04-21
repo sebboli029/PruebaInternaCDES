@@ -16,16 +16,19 @@ df['height'] = df['height'].apply(height_to_cm)
 # Calcular el IMC
 df['IMC'] = df['weight'] / (df['height'] / 100) ** 2
 
+desired_positions = ['QB', 'WR', 'G', 'T']
+df = df[df['position'].isin(desired_positions)]
+
 # Seleccionar las columnas deseadas y renombrarlas a español
 selected_columns = df[['position', 'height', 'weight', 'IMC']]
 selected_columns.columns = ['posición', 'altura (cm)', 'peso (kg)', 'IMC']
 
 # Calcular el promedio de altura, peso e IMC por cada posición
-average_columns = selected_columns.groupby('posición').mean().reset_index()
+average_columns = selected_columns.reset_index()
 
 # Guardar los datos promediados en un archivo CSV
-output_file_path = 'C:/Users/sebbo/Documents/prueba interna/promedios_posiciones.csv'
-average_columns.to_csv(output_file_path, index=False)
+output_file_path = 'C:/Users/sebbo/Documents/pruebaInterna/total_posiciones.xlsx'
+average_columns.to_excel(output_file_path, index=False)
 
 # Mostrar los datos promediados usando tabulate con líneas continuas
 print(tabulate(average_columns, headers='keys', tablefmt='fancy_grid'))
