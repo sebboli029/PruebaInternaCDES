@@ -24,11 +24,16 @@ selected_columns = df[['position', 'height', 'weight', 'IMC']]
 selected_columns.columns = ['posición', 'altura (cm)', 'peso (kg)', 'IMC']
 
 # Calcular el promedio de altura, peso e IMC por cada posición
-average_columns = selected_columns.reset_index()
+total_columns = selected_columns.reset_index()
+averge_columns = total_columns.groupby('posición').mean().reset_index()
 
-# Guardar los datos promediados en un archivo CSV
+# Guardar los datos promediados  y totales en un archivo de Excel
 output_file_path = 'C:/Users/sebbo/Documents/pruebaInterna/total_posiciones.xlsx'
-average_columns.to_excel(output_file_path, index=False)
+total_columns.to_excel(output_file_path, index=False)
 
-# Mostrar los datos promediados usando tabulate con líneas continuas
-print(tabulate(average_columns, headers='keys', tablefmt='fancy_grid'))
+output_file_path = 'C:/Users/sebbo/Documents/pruebaInterna/media_posiciones.xlsx'
+averge_columns.to_excel(output_file_path, index=False)
+
+# Mostrar los datos promediados y totalesusando tabulate con líneas continuas
+print(tabulate(total_columns, headers='keys', tablefmt='fancy_grid'))
+print(tabulate(averge_columns, headers='keys', tablefmt='fancy_grid'))
